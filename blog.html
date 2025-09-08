@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadeko's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Using Inter for English UI, Vazirmatn can be a fallback or for Persian content */
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            --color-beige: #FDFBF5;
+            --color-navy: #1D2B4A;
+            --color-persian-red: #C82A3A;
+            --shadow-light: rgba(255, 255, 255, 0.9);
+            --shadow-dark: rgba(214, 211, 204, 0.6);
+            background-color: var(--color-beige);
+        }
+        .text-navy { color: var(--color-navy); }
+        .text-persian-red { color: var(--color-persian-red); }
+        
+        .neumorphic {
+            background: var(--color-beige);
+            border-radius: 24px;
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .neumorphic-inset {
+            background: var(--color-beige);
+            border-radius: 24px;
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .neumorphic:hover {
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+        
+        .neumorphic-button:active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        /* Custom styles for post content (keeping Farsi styles) */
+        .post-content { font-family: 'Vazirmatn', sans-serif; }
+        .post-content h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 1.5rem; text-align: right;}
+        .post-content h2 { font-size: 1.875rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; text-align: right;}
+        .post-content h3 { font-size: 1.5rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; text-align: right;}
+        .post-content p { line-height: 1.8; margin-bottom: 1.25rem; text-align: justify;}
+        .post-content ul { list-style-type: disc; padding-right: 2rem; margin-bottom: 1.25rem; text-align: right;}
+        .post-content ol { list-style-type: decimal; padding-right: 2rem; margin-bottom: 1.25rem; text-align: right;}
+        .post-content table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+        .post-content th, .post-content td { border: 1px solid var(--shadow-dark); padding: 0.75rem; text-align: right; }
+        .post-content th { background-color: rgba(29, 43, 74, 0.05); }
+        .post-content hr { border-top: 1px solid var(--shadow-dark); margin: 2.5rem 0; }
+
+    </style>
+</head>
+<body class="bg-beige text-navy">
+
+    <!-- Wrapper -->
+    <div class="container mx-auto px-4 md:px-8">
+
+        <!-- 1. Header -->
+        <header class="py-6 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <!-- Logo Placeholder -->
+                <div class="w-32 h-12 flex items-center justify-center border-2 border-dashed border-navy/30 rounded-2xl">
+                    <span class="text-navy/50 font-semibold">Nadeko</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-lg">
+                <a href="#" id="home-link" class="hover:text-persian-red transition-colors">Home</a>
+                <a href="#posts" id="posts-link" class="hover:text-persian-red transition-colors">Posts</a>
+                <a href="#" id="about-link" class="neumorphic neumorphic-button font-semibold px-6 py-3 rounded-2xl text-navy hover:text-persian-red">About & Contact</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden neumorphic neumorphic-button p-3" id="menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </header>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col items-center gap-4 py-6 mt-4 neumorphic">
+             <a href="#" id="mobile-home-link" class="hover:text-persian-red transition-colors block w-full text-center py-3">Home</a>
+             <a href="#posts" id="mobile-posts-link" class="hover:text-persian-red transition-colors block w-full text-center py-3">Posts</a>
+             <a href="#" id="mobile-about-link" class="neumorphic neumorphic-button font-semibold px-6 py-3 rounded-2xl text-navy hover:text-persian-red block w-3/4 text-center mt-4">About & Contact</a>
+        </div>
+
+
+        <!-- 2. Main Page -->
+        <main class="py-12 md:py-20">
+
+            <!-- Home Page View -->
+            <div id="home-view">
+                <section class="text-center max-w-3xl mx-auto mb-20">
+                    <h2 class="text-3xl md:text-5xl font-bold leading-tight">
+                        An Exploration at the Intersection of <span class="text-persian-red">Philosophy</span>, <span class="text-persian-red">Politics</span>, and <span class="text-persian-red">Society</span>
+                    </h2>
+                    <p class="mt-6 text-lg md:text-xl text-navy/80">
+                        A space for deeper analysis of phenomena, finding the hidden connections between daily events and fundamental concepts.
+                    </p>
+                </section>
+    
+                <section id="posts">
+                    <h3 class="text-2xl font-bold mb-8 text-center md:text-left">Latest Posts</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        
+                        <!-- Post Card 1 -->
+                        <div class="neumorphic overflow-hidden group">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjz3-JfChLs3y368xq-rlEQLXbxWftnOuAk5dKcgIxT3IOQYoUCyaDMmGpGhh6k7vTYeMHK-QhadRkzvlgMZ2G98BOYLU1e7-9WAC2sXxtRKov-C_1Yv_za9ASe5zbocx1pHbp_IyCOetExz_pf82ovTMAJuJb9Uuiq0y12zgLzW0A1q65HSBRn2_QnuFQ/w600-h399/Forms,%20due%20dates,%20etc_!!!.jpeg" alt="Wealth tax article image" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-sm font-semibold text-persian-red">Economics & Politics</span>
+                                <h4 class="text-xl font-bold mt-2 mb-3">Analysis of Wealth Tax in Iran</h4>
+                                <p class="text-navy/70 mb-4 text-base">Exploring the legal, economic, and social dimensions and strategies for efficiency and justice.</p>
+                                <a href="#" id="read-more-btn" class="font-semibold text-navy/90 group-hover:text-persian-red transition-colors">Read More &rarr;</a>
+                            </div>
+                        </div>
+    
+                        <!-- Post Card 2 -->
+                        <div class="neumorphic overflow-hidden group">
+                            <img src="https://placehold.co/600x400/C82A3A/FDFBF5?text=Philosophy" alt="Philosophy article image" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-sm font-semibold text-persian-red">Philosophy</span>
+                                <h4 class="text-xl font-bold mt-2 mb-3">The Concept of "Free Will" in the Age of Algorithms</h4>
+                                <p class="text-navy/70 mb-4 text-base">Are our choices truly our own, or just an echo of the data we consume?</p>
+                                <a href="#" class="font-semibold text-navy/90 group-hover:text-persian-red transition-colors">Read More &rarr;</a>
+                            </div>
+                        </div>
+    
+                        <!-- Post Card 3 -->
+                        <div class="neumorphic overflow-hidden group">
+                             <img src="https://placehold.co/600x400/1D2B4A/FDFBF5?text=Society" alt="Society article image" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-sm font-semibold text-persian-red">Society</span>
+                                <h4 class="text-xl font-bold mt-2 mb-3">Modern Loneliness: The Paradox of Constant Connection</h4>
+                                <p class="text-navy/70 mb-4 text-base">How have social networks, with the promise of connection, left us lonelier than ever?</p>
+                                <a href="#" class="font-semibold text-navy/90 group-hover:text-persian-red transition-colors">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Single Post View -->
+            <div id="post-view" class="hidden">
+                <div class="neumorphic p-6 md:p-10 lg:p-12">
+                    <button class="back-btn neumorphic neumorphic-button mb-8 font-semibold px-6 py-3 rounded-2xl text-navy hover:text-persian-red">&larr; Back to Home</button>
+                    <!-- Post content will be inserted here from user's text -->
+                    <div class="post-content">
+                        <h1>تحلیل نظام مالیات بر ثروت در ایران</h1>
+                        <h2>مقدمه</h2>
+                        <p>مالیات بر ثروت همواره یکی از چالش‌برانگیزترین ابزارهای سیاست‌گذاری مالی در اقتصادهای معاصر شمرده می‌شود؛ ابزاری که در نگاه نخست می‌تواند عدالت اجتماعی را بسط دهد و رفاه عمومی را تأمین کند، اما در فقدان ملاحظات نهادی و اقتصادی، تهدیدی برای فرار سرمایه و تضعیف سرمایه‌گذاری مولد خواهد بود. در سال‌های اخیر، اقتصاد ایران نیز در بستر تحولات ساختاری و تحریم‌های فراگیر، با مسئله ضرورت تقویت شفافیت، پاسخگویی و کارآمدسازی نظام مالیاتی و بودجه‌ای، روبه‌رو شده است. این گزارش با تمرکز بر نظام مالیات بر ثروت در ایران، ضمن کاوش نظری ـ تطبیقی و بررسی تجربه‌های جهانی، ابعاد حقوقی،‌ اقتصادی و اجتماعی این ابزار را تحلیل و راهبردهایی عملی برای ارتقای کارآمدی و عدالت در چارچوب اقتصاد ایران ارائه می‌کند.</p>
+                        <hr/>
+                        <h2>چارچوب نظری و مفهومی مالیات بر ثروت</h2>
+                        <p>مالیات بر ثروت که در ادبیات تخصصی گاه به «مالیات بر دارایی» نیز تعبیر می‌شود، مالیاتی است که بر مجموع یا اجزای دارایی‌های خالص یک فرد یا خانوار ـ پس از کسر بدهی‌ها ـ و نه بر درآمد جاری آنها اخذ می‌شود. هدف اصلی از وضع این مالیات،‌ تعدیل توزیع ثروت، تأمین مالی پروژه‌های عمومی، کاهش انباشت سرمایه در دست اقلیت‌ها و بازتوزیع فرصت‌های اجتماعی ـ اقتصادی است. از منظر نظری، نظام مالیات بر ثروت بر دو اصل بنیادین استوار است: اصل عدالت مالیاتی (کسی که بیشتر دارد، بیشتر می‌پردازد) و اصل کارکرد اجتماعی ثروت (هر دارایی باید به اندازه نقش آن در تولید ثروت و بهره‌وری در اقتصاد، مالیات بدهد). تاکید توماس پیکتی، اقتصاددان فرانسوی، بر این نکته که نرخ بازده ثروت (r) به صورت ساختاری از نرخ رشد اقتصادی (g) بیشتر است و این عدم تعادل، زمینه‌ساز رشد نابرابری است، چارچوب تحلیلی اتخاذ مالیات بر ثروت را تقویت می‌کند. در تقسیم‌بندی رایج، مالیات بر ثروت شامل مالیات بر خالص اموال، مالیات بر اجزای خاص (مثلا املاک، خودرو، سهام) و مالیات بر انتقالات ثروت (ارث و هبه) می‌گردد.</p>
+                        <hr/>
+                        <h2>تجربه‌های جهانی در پیاده‌سازی مالیات بر ثروت</h2>
+                        <p>تجارب کشورهای مختلف نشان می‌دهد که مالیات بر ثروت می‌تواند کارکردهای مؤثر اما متفاوتی داشته باشد. تجارب جهانی بر سه نکته تأکید دارد:</p>
+                        <ul>
+                            <li>مالیات بر ثروت زمانی مؤثر است که پایه مالیاتی دقیق تعریف شده باشد و فرار سرمایه (Capital Flight) کنترل گردد؛</li>
+                            <li>دارایی‌هایی که به تولید ارزش و اشتغال کمک می‌کنند، در اغلب موارد معافیت یا نرخ‌های ترجیحی دریافت می‌کنند تا موجب خروج سرمایه از بخش مولد نشود؛</li>
+                            <li>هرگونه سیاست جدید باید متناسب با ساختار اقتصادی و نظام حقوقی بومی طراحی و اجرا شود.</li>
+                        </ul>
+                        <!-- ... The rest of the article would continue here ... -->
+                        <hr/>
+                        <h2>جمع‌بندی پایانی</h2>
+                        <p>مالیات بر ثروت، اگر به صورت تدریجی و هدفمند و با توجه به نقش اجتماعی و اقتصادی انواع دارایی‌ها اجرا شود، ظرفیتی کم‌نظیر برای کاهش نابرابری، تأمین مالی پروژه‌های عمومی و تثبیت بازار سرمایه‌گذاری دارد. اجرای سیاست‌های بدون مخالفت و غیرکارشناسی، فارغ از تمایز میان ثروت مولد و غیرمولد، تنها به افزایش فرار سرمایه و کاهش رشد اقتصاد مولد می‌انجامد. حرکت به سوی تفکیک نفت از بودجه عمومی، شفافیت و اختیارات نظام‌مند مجلس، رمز ارتقای اعتماد عمومی و تحقق یک اقتصاد کارآمد و عادلانه و شفاف است. آینده اقتصاد و رفاه عمومی ایران، مستقیماً وابسته به این اصلاحات ساختاری و جسورانه خواهد بود.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Page View -->
+            <div id="about-view" class="hidden">
+                 <div class="neumorphic p-6 md:p-10 lg:p-12">
+                    <button class="back-btn neumorphic neumorphic-button mb-8 font-semibold px-6 py-3 rounded-2xl text-navy hover:text-persian-red">&larr; Back to Home</button>
+                    <div class="max-w-3xl mx-auto">
+                        <h2 class="text-3xl font-bold mb-6 text-center">About Me</h2>
+                        <p class="text-lg text-navy/80 leading-relaxed text-justify mb-12">
+                            Here you can write a short introduction about yourself, your background, your interests, and your goal for this blog. You can talk about your perspective on philosophical, political, and social topics and what motivates you to write about them. The goal is to let the reader get to know the person behind the posts.
+                        </p>
+
+                        <h2 class="text-3xl font-bold mb-8 text-center">Contact Me</h2>
+                        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                            <a href="mailto:your-email@example.com" class="neumorphic neumorphic-button p-4 rounded-full text-navy hover:text-persian-red flex items-center gap-3">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <span>Email</span>
+                            </a>
+                            <a href="#" class="neumorphic neumorphic-button p-4 rounded-full text-navy hover:text-persian-red flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+        </main>
+
+        <!-- 5. Footer -->
+        <footer class="text-center py-10 mt-12">
+             <div class="flex justify-center gap-6 mb-6">
+                <!-- Social links with neumorphic style -->
+                 <a href="#" class="neumorphic neumorphic-button p-4 rounded-full text-navy hover:text-persian-red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="#" class="neumorphic neumorphic-button p-4 rounded-full text-navy hover:text-persian-red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                 <a href="#" class="neumorphic neumorphic-button p-4 rounded-full text-navy hover:text-persian-red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+            <p class="text-navy/70">&copy; 2024 | All rights reserved for Nadeko.</p>
+        </footer>
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Page views
+            const homeView = document.getElementById('home-view');
+            const postView = document.getElementById('post-view');
+            const aboutView = document.getElementById('about-view');
+            const allViews = [homeView, postView, aboutView];
+
+            // Navigation buttons
+            const homeLink = document.getElementById('home-link');
+            const mobileHomeLink = document.getElementById('mobile-home-link');
+            const aboutLink = document.getElementById('about-link');
+            const mobileAboutLink = document.getElementById('mobile-about-link');
+            const postsLink = document.getElementById('posts-link');
+            const mobilePostsLink = document.getElementById('mobile-posts-link');
+
+            // Action buttons
+            const readMoreBtn = document.getElementById('read-more-btn');
+            const backBtns = document.querySelectorAll('.back-btn');
+            
+            // Mobile menu
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // --- Functions ---
+            const showView = (viewToShow) => {
+                allViews.forEach(view => view.classList.add('hidden'));
+                if (viewToShow) {
+                    viewToShow.classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                }
+            };
+            
+            const closeMobileMenu = () => {
+                 mobileMenu.classList.add('hidden');
+                 mobileMenu.classList.remove('flex');
+            }
+
+            // --- Event Listeners ---
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(homeView);
+            });
+             mobileHomeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(homeView);
+                closeMobileMenu();
+            });
+
+            aboutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(aboutView);
+            });
+             mobileAboutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(aboutView);
+                closeMobileMenu();
+            });
+
+            readMoreBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(postView);
+            });
+            
+            postsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(homeView);
+                document.getElementById('posts').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            mobilePostsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showView(homeView);
+                document.getElementById('posts').scrollIntoView({ behavior: 'smooth' });
+                closeMobileMenu();
+            });
+
+            backBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showView(homeView);
+                });
+            });
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+
+            // Initial view
+            showView(homeView);
+        });
+    </script>
+
+</body>
+</html>
+
